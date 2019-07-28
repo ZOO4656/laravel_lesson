@@ -20,7 +20,7 @@ class LoginController extends Controller
     */
 
     use AuthenticatesUsers;
-    protected $maxAttempts = 3;     //ログイン試行回数(回)
+    protected $maxAttempts = 3;     //ログイン試行回数(回
     protected $decayMinutes = 1;    //ロックアウトタイム(分)
 
     /**
