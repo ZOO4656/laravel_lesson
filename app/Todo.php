@@ -15,7 +15,6 @@ class Todo extends Model
 
     public function getByUserId($id)
     {
-
         return $this->where('user_id', $id)->get();
     }
 }

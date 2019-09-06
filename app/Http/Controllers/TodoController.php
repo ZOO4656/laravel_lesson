@@ -24,6 +24,7 @@ class TodoController extends Controller
 
     public function index()
     {
+        $this->todo->all();
         //Auth::idで現在認証しているユーザのidを取得する
         $todos = $this->todo->getByUserId(Auth::id());
         return view('todo.index', compact('todos'));
@@ -51,7 +52,7 @@ class TodoController extends Controller
         $input = $request->all();
         $input['user_id'] = Auth::id();
         $this->todo->fill($input)->save();
-        return redirect()->to('todo');
+        return redirect()->route('todo.index');
     }
 
     /**
@@ -74,7 +75,7 @@ class TodoController extends Controller
     public function edit($id)
     {
         $todo = $this->todo->find($id);
-         return view('todo.edit', compact('todo'));
+        return view('todo.edit', compact('todo'));
     }
 
     // return viewで何を返しているのか。
@@ -83,7 +84,7 @@ class TodoController extends Controller
 
     // update
     // UPDATE テーブル名 SET 値 WHERE 条件
-    
+
     // delete
     // DELETE FROM テーブル名 WHERE 条件
 
@@ -97,9 +98,8 @@ class TodoController extends Controller
     public function update(Request $request, $id)
     {
         $input = $request->all();
-        // dd($input);
         $this->todo->find($id)->fill($input)->save();
-        return redirect()->to('todo');
+        return redirect()->route('todo.index');
     }
 
     /**
@@ -111,6 +111,6 @@ class TodoController extends Controller
     public function destroy($id)
     {
         $this->todo->find($id)->delete();
-        return redirect()->to('todo');
+        return redirect()->route('todo.index');
     }
 }
